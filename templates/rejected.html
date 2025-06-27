@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Transaction Rejected</h2>
-<p>Rejection Code: {{ code }}</p>
-<a href="/">Restart POS</a>
+<div class="text-center space-y-3">
+    <h2 class="text-red-500 text-xl font-bold">❌ Transaction Rejected</h2>
+    <p class="text-sm">Reason: {{ code }}</p>
+    <p>Restarting session...</p>
+    <script>setTimeout(() => { window.location.href = "/" }, 7000)</script>
+</div>
 {% endblock %}
 

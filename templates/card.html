@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Enter Card Details</h2>
-<form action="/card" method="post">
-    <input name="pan" placeholder="Card Number" required><br>
-    <input name="expiry" placeholder="MM/YY" required><br>
-    <input name="cvv" placeholder="CVV" required><br>
-    <button type="submit">Continue</button>
-</form>
+<div class="max-w-sm w-full space-y-4">
+    <h2 class="text-lg font-medium text-center">Card Entry</h2>
+    <form method="POST" action="/card">
+        <input type="text" name="pan" placeholder="Card Number (PAN)" class="w-full p-2 rounded text-black" required>
+        <input type="text" name="exp" placeholder="MM/YY" class="w-full p-2 rounded text-black" required>
+        <input type="text" name="cvv" placeholder="CVV" class="w-full p-2 rounded text-black" required>
+        <button class="mt-3 w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">Authenticate</button>
+    </form>
+</div>
 {% endblock %}
 
