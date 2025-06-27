@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Enter Amount</h2>
+<form action="/amount" method="post">
+    <input name="amount" type="number" required step="0.01">
+    <button type="submit">Continue</button>
+</form>
+{% endblock %}
+

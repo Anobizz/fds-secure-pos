@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Enter Card Details</h2>
+<form action="/card" method="post">
+    <input name="pan" placeholder="Card Number" required><br>
+    <input name="expiry" placeholder="MM/YY" required><br>
+    <input name="cvv" placeholder="CVV" required><br>
+    <button type="submit">Continue</button>
+</form>
+{% endblock %}
+

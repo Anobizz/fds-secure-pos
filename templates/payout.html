@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Select Payout Method</h2>
+<form action="/payout" method="post">
+    <label><input type="radio" name="method" value="BANK" checked> Bank</label><br>
+    <input name="bank" placeholder="Bank Name"><br>
+    <input name="account" placeholder="Account Number"><br><br>
+    <label><input type="radio" name="method" value="TRC20"> TRC20 Wallet</label><br>
+    <input name="wallet" placeholder="TRC20 Address"><br><br>
+    <button type="submit">Continue</button>
+</form>
+{% endblock %}
+

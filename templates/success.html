@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Transaction Approved</h2>
+<p>Please check your merchant email for a receipt.</p>
+<p>Transaction ID: TXN{{ txn_id }}</p>
+<p>Card: •••• •••• •••• {{ pan[-4:] }}</p>
+<p>You will be redirected in 10 seconds...</p>
+<script>
+  setTimeout(() => { window.location.href = '/' }, 10000);
+</script>
+{% endblock %}
+

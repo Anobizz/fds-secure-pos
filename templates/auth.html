@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Authorization Code</h2>
+{% if warning %}<p style="color:red;">{{ warning }}</p>{% endif %}
+<form action="/auth" method="post">
+    <input name="auth" placeholder="6-digit Auth Code" required>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
+
