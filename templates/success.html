@@ -1,12 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="text-center space-y-3">
-    <h2 class="text-green-400 text-xl font-bold">Transaction Approved</h2>
-    <p class="text-sm">Transaction ID: TXN{{ txn_id }}</p>
-    <p>Card: •••• •••• •••• {{ pan }}</p>
-    <p class="text-xs text-gray-300">Check your merchant email for the receipt.</p>
-    <p class="text-gray-400">Redirecting...</p>
-    <script>setTimeout(() => { window.location.href = "/" }, 10000)</script>
-</div>
+<h2>Transaction Approved </h2>
+<p>Transaction ID: {{ txn_id }}</p>
+<p>Card ending in: **** **** **** {{ pan }}</p>
+<p>Receipt sent. Please check your merchant email inbox.</p>
+<a href="{{ url_for('home') }}">Start New Transaction</a>
 {% endblock %}
 

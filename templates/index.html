@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Welcome to Secure POS Simulator</h2>
-<form action="/amount" method="post">
-    <label>Enter Amount (USD):</label><br>
-    <input type="number" name="amount" step="0.01" required><br><br>
-    <button type="submit">Start Transaction</button>
+<form method="POST" action="{{ url_for('amount') }}">
+    <label>Enter Amount to Withdraw:</label><br>
+    <input type="text" name="amount" required><br>
+    <button type="submit">Next</button>
 </form>
 {% endblock %}
 

@@ -1,10 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="text-center space-y-3">
-    <h2 class="text-red-500 text-xl font-bold">❌ Transaction Rejected</h2>
-    <p class="text-sm">Reason: {{ code }}</p>
-    <p>Restarting session...</p>
-    <script>setTimeout(() => { window.location.href = "/" }, 7000)</script>
-</div>
+<h2>Transaction Rejected ❌</h2>
+<p>Error Code: {{ code }}</p>
+<a href="{{ url_for('home') }}">Restart</a>
 {% endblock %}
 

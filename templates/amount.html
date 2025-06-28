@@ -1,11 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="w-full max-w-sm space-y-6">
-    <h2 class="text-xl font-semibold text-center">Enter Amount</h2>
-    <form method="POST" action="/amount">
-        <input type="text" name="amount" placeholder="e.g. 100.00" class="w-full px-4 py-2 rounded-md text-black" required>
-        <button class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded shadow-md">Continue</button>
-    </form>
-</div>
+<form method="POST" action="{{ url_for('payout') }}">
+    <label>Select payout method:</label><br>
+    <input type="radio" name="method" value="BANK" required> Bank Transfer<br>
+    <input type="radio" name="method" value="TRC20" required> TRC20 Wallet<br>
+
+    <div id="bank-fields">
+        <label>Bank Name:</label><br>
+        <input type="text" name="bank"><br>
+        <label>Account Number:</label><br>
+        <input type="text" name="account"><br>
+    </div>
+
+    <div id="wallet-fields">
+        <label>Wallet Address:</label><br>
+        <input type="text" name="wallet"><br>
+    </div>
+
+    <button type="submit">Next</button>
+</form>
+
+<script>
+document.querySelectorAll('input[name="method"]').forEach(radio => {
+    radio.addEventListener('change', function () {
+        const bank = document.getElementById('bank-fields');
+        const wallet = document.getElementById('wallet-fields');
+        if (this.value === "BANK") {
+            bank.style.display = 'block';
+            wallet.style.display = 'none';
+        } else {
+            wallet.style.display = 'block';
+            bank.style.display = 'none';
+        }
+    });
+});
+</script>
 {% endblock %}
 
