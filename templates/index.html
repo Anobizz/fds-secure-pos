@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% block content %}
-<form method="POST" action="{{ url_for('amount') }}">
-    <label>Enter Amount to Withdraw:</label><br>
-    <input type="text" name="amount" required><br>
-    <button type="submit">Next</button>
-</form>
-{% endblock %}
-

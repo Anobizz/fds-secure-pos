@@ -1,39 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" action="{{ url_for('payout') }}">
-    <label>Select payout method:</label><br>
-    <input type="radio" name="method" value="BANK" required> Bank Transfer<br>
-    <input type="radio" name="method" value="TRC20" required> TRC20 Wallet<br>
-
-    <div id="bank-fields">
-        <label>Bank Name:</label><br>
-        <input type="text" name="bank"><br>
-        <label>Account Number:</label><br>
-        <input type="text" name="account"><br>
-    </div>
-
-    <div id="wallet-fields">
-        <label>Wallet Address:</label><br>
-        <input type="text" name="wallet"><br>
-    </div>
-
+<form method="POST" action="{{ url_for('amount') }}">
+    <label>Enter Amount to Withdraw:</label><br>
+    <input type="text" name="amount" required><br>
     <button type="submit">Next</button>
 </form>
-
-<script>
-document.querySelectorAll('input[name="method"]').forEach(radio => {
-    radio.addEventListener('change', function () {
-        const bank = document.getElementById('bank-fields');
-        const wallet = document.getElementById('wallet-fields');
-        if (this.value === "BANK") {
-            bank.style.display = 'block';
-            wallet.style.display = 'none';
-        } else {
-            wallet.style.display = 'block';
-            bank.style.display = 'none';
-        }
-    });
-});
-</script>
 {% endblock %}
 
