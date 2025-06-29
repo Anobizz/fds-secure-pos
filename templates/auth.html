@@ -1,13 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" action="{{ url_for('auth') }}">
+<form id="authForm" method="POST" action="{{ url_for('auth') }}">
     <label>Enter Authorization Code:</label><br>
     <input type="text" name="auth" required><br>
     <button type="submit">Verify</button>
 </form>
 
+<div id="progress" style="display:none; margin-top: 15px;">
+    <p id="msg">Please wait . . .</p>
+</div>
+
 {% if warning %}
 <p style="color: red;">{{ warning }}</p>
 {% endif %}
+
+<script>
+document.getElementById("authForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const form = this;
+    const progress = document.getElementById("progress");
+    const msg = document.getElementById("msg");
+
+    progress.style.display = "block";
+    msg.innerText = "Please wait . . .";
+
+    setTimeout(() => {
+        msg.innerText = "Connecting to server . . .";
+        setTimeout(() => {
+            msg.innerText = "Processing transaction . . .";
+            setTimeout(() => {
+                form.submit();
+            }, 2000 + Math.random() * 1000); // final submit after 2-3s
+        }, 2000 + Math.random() * 1000);
+    }, 1000 + Math.random() * 1000);
+});
+</script>
 {% endblock %}
 
