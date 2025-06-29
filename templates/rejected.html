@@ -1,7 +1,18 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Transaction Rejected ❌</h2>
-<p>Error Code: {{ code }}</p>
-<a href="{{ url_for('home') }}">Restart</a>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Transaction Rejected</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="rejected">
+  <div class="container">
+    <h1>Transaction Rejected ❌</h1>
+    <p class="error-code">ISO8583 Field 39 Code: <strong>{{ code }}</strong></p>
+    <p class="reason">{{ reason }}</p>
+    <p class="note">Please contact your card issuer or try a different card.</p>
+    <a href="{{ url_for('home') }}" class="btn">New Transaction</a>
+  </div>
+</body>
+</html>
 

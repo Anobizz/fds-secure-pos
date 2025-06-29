@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>POS Receipt</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      background: #f5f5f5;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .receipt-container {
+      width: 420px;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .receipt {
+      border: 1px dashed #000;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .logo {
+      width: 80px;
+      margin: 0 auto 10px;
+    }
+
+    .divider {
+      border-top: 1px dashed black;
+      margin: 10px 0;
+    }
+
+    .field {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .copy-label {
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+      border-bottom: 1px solid #000;
+      padding-bottom: 5px;
+    }
+
+    .qr {
+      width: 100px;
+      display: block;
+      margin: 10px auto;
+    }
+
+    .btn-print {
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .btn-print button {
+      background: black;
+      color: white;
+      padding: 6px 14px;
+      border: none;
+      font-size: 0.9em;
+      cursor: pointer;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.75em;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    @media print {
+      .btn-print {
+        display: none;
+      }
+      body {
+        background: none;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="receipt-container" id="receipt">
+
+  {% for copy in ['Customer Copy', 'Merchant Copy'] %}
+  <div class="receipt">
+    <div class="copy-label">{{ copy }}</div>
+
+    <div class="center">
+      <img src="{{ url_for('static', filename='icons/icon-192.png') }}" class="logo" alt="Logo">
+      <h2>FDS SECURE POS</h2>
+      <p>Terminal ID: TML001-8583</p>
+      <p>Merchant: FDS SYSTEMS</p>
+      <p>Address: 281 Madison Ave, New York, NY 10016</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="field"><span>Date/Time:</span><span>{{ timestamp }}</span></div>
+    <div class="field"><span>Txn ID:</span><span>{{ txn_id }}</span></div>
+    <div class="field"><span>Card:</span><span>**** **** **** {{ pan }}</span></div>
+    <div class="field"><span>Amount:</span><span>USD {{ amount }}</span></div>
+    <div class="field"><span>Auth Code (F-39):</span><span>{{ field39 }}</span></div>
+    <div class="field"><span>ARN:</span><span>{{ arn }}</span></div>
+
+    <div class="divider"></div>
+
+    <div class="center">
+      {% if field39 == '00' %}
+        <p><strong>TRANSACTION APPROVED ✅</strong></p>
+      {% else %}
+        <p><strong>TRANSACTION DECLINED ❌</strong></p>
+      {% endif %}
+    </div>
+
+    <div class="center">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ 
+        'TXN#'+txn_id|string + '|CARD=****' + pan + '|AMT=USD' + amount + 
+        '|CODE=' + field39 + '|ARN=' + arn + '|TS=' + timestamp + 
+        '|SIG=0xF2E3B92A4|PROTO=ISO8583-v1.2.3|BCHKSUM=0xD0EADC11'
+       | urlencode }}" 
+       class="qr" alt="QR Code">
+    </div>
+
+    <div class="footer">
+      Powered by FDS — Keep this copy for your records
+    </div>
+  </div>
+  {% endfor %}
+
+  <div class="btn-print">
+    <button onclick="window.print()">🖨️ Print Both Copies</button>
+  </div>
+
+</div>
+
+</body>
+</html>
+

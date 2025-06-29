@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>FDS Secure POS</title>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <meta name="theme-color" content="#1a237e">
+    <link rel="icon" href="{{ url_for('static', filename='icons/icon-192.png') }}">
     <link rel="stylesheet" href="/static/style.css">
 </head>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/static/service-worker.js')
+    .then((reg) => console.log("✅ Service Worker Registered", reg))
+    .catch((error) => console.error("❌ Service Worker failed:", error));
+}
+</script>
 <body>
     <div class="container">
         <h1>FDS Secure POS Terminal</h1>

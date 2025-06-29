@@ -3,7 +3,9 @@
 <h2>Transaction Approved </h2>
 <p>Transaction ID: {{ txn_id }}</p>
 <p>Card ending in: **** **** **** {{ pan }}</p>
-<p>Receipt sent. Please check your merchant email inbox.</p>
-<a href="{{ url_for('home') }}">Start New Transaction</a>
+<p> We have sent a copy of receipt to your merchant email. Please check your merchant email inbox.</p>
+<a href="{{ url_for('receipt') }}" class="btn">View Receipt</a>
+<a href="{{ url_for('home') }}" class="btn">New Transaction</a>
+
 {% endblock %}
 
